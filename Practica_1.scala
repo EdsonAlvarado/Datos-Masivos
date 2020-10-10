@@ -37,3 +37,11 @@ println("\n")
 val greet = s"Estoy escribiendo un $bird"
 /*4*/ val mensaje = "Hola Luke yo soy tu padre!"
 mensaje slice (5,9)
+
+println("\n")
+println("5. Cual es la diferencia entre value y una variable en scala?")
+println("El valor de value es fijo y el de var si puede cambiar.")
+println("\n")
+println("6. Dada la tupla (2,4,5,1,2,3,3.1416,23) regresa el numero 3.1416") 
+val mi_tupla = (2,4,5,1,2,3,3.1416,23)
+mi_tupla._7
