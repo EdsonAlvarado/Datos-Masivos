@@ -32,3 +32,8 @@ if (primo == 1){
 
 }
 println("\n")
+
+/*3*/ val bird = "tweet"
+val greet = s"Estoy escribiendo un $bird"
+/*4*/ val mensaje = "Hola Luke yo soy tu padre!"
+mensaje slice (5,9)
