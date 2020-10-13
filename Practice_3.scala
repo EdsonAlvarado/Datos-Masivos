@@ -44,8 +44,19 @@ def afortunado(list:List[Int]): Int={
     return res
 }
 
+
 val af= List(1,7,7)
 println(afortunado(af))
+
+
+/*Esta función lo que hace es que mediante un ciclo compara si los valores de las listas tienen un balance
+ al sumarse entre si mismos y restarse su suma con cada uno de sus valores, si el resultado de la suma de
+ los valores de una lista coincide con la resta de los valores de la lista a su suma entonces la función nos
+ regresara el resultado de verdadero y terminara la comparación por ejemplo en la primera lista 
+ en la primera corrida a la variable primera se le suma 3 y mantiene ese resultado, y la variable segunda
+ tiene como valor inicial 6 y si se le restan los 3 de la lista (bl) nos quedan 3 y coinciden los valores de
+ ambas variables entonces se clasifica como true, lo mismo pasa con la segunda lista (bl2) en su segunda 
+ corrida pero nunca llega a pasar con la lista 3 (bl3)*/
 
 def balance(list:List[Int]): Boolean={
     var primera = 0
@@ -71,6 +82,11 @@ val bl3 = List(10,30,90)
 balance(bl)
 balance(bl2)
 balance(bl3)
+
+
+/*Esta función toma una palabra y la voltea utilizando la operación reverse entonces la función evalua 3
+palabras: oso, anna y juan, oso y anna nos regresan TRUE debido a que si son palindromos, en el caso de juan
+nos regresa FALSE al no ser palindromo*/
 
 def palindromo(palabra:String):Boolean ={
     return (palabra == palabra.reverse)
