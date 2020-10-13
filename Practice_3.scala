@@ -4,8 +4,10 @@
 // def isEven(num:Int): num%2 == 0
 // println(isEven(6))
 // println(isEven(3))
-// Practice 3, analyse the following code with your own words
 
+
+/*En el punto de esta funcion es determinar si el numero de la lista es par o impar desplegando texto para 
+cada numero de la lista*/
 def listEvens(list:List[Int]): String ={
     for(n <- list){
         if(n%2==0){
@@ -24,6 +26,12 @@ listEvens(l2)
 
 //3 7 afortunado
 
+/*En esta funcion se utilizan los valores de la lista que son (1,7,7) agarra el primer valor que es 1
+pero no cumple con la condicion entonces se aplica la operacion 0 = 0 + 1 (valor de n) prosigue con el
+siguiente numero de la lista que es 7 en este caso si cumple con la condicion de n==7 entonces se aplica
+la operacion pero en este caso el valor de res ahora es 1, entonces tenemos que res = 1+14 res ahora vale 15
+procediendo con el ultimo valor de la lista que es 7 se repite el mismo proceso al cumplir la condicion
+entonces ahora res vale 15 + 14 que da como resultado "29"*/
 def afortunado(list:List[Int]): Int={
     var res=0
     for(n <- list){
