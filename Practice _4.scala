@@ -40,3 +40,33 @@ def fib3(n: Int): Int = {
 
     return a
 }
+
+//4
+var d: Int = 0
+var e: Int = 1
+
+def fib4(n: Int): Int = {
+  
+    for (k <- Range(0, n)){
+        e = e + d
+        d = e - d
+    }
+
+    return d
+}
+
+//5
+
+def fib5(numero: Int): Int = {
+    if (numero < 2) {
+        return numero
+    } else {
+         var arreglo = new Array[Int](numero + 1)
+         arreglo(0) = 0
+         arreglo(1) = 1
+         for (k <- Range(2, numero + 1)) {
+            arreglo(k) = arreglo(k - 1) + arreglo(k - 2)
+         }
+         return arreglo(numero)
+    }
+}
