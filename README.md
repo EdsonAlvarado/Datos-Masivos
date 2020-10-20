@@ -70,3 +70,162 @@ mensaje slice (5,9)
 val mi_tupla = (2,4,5,1,2,3,3.1416,23)
 mi_tupla._7
 ```
+
+
+## Practice 2
+> First we need to import the following library
+
+```
+import scala.collection.mutable.MutableList
+```
+
+### Excersice 1
+> We're creating a list with 3 elements
+
+```
+val lista = List("rojo","blanco","negro")
+```
+
+### Excersice 2
+> We're creating a list with more elements
+
+```
+val lista = List("rojo","blanco","negro","verde","amarillo","azul","naranja","perla")
+```
+
+### Excersice 3
+> Then we need to retrieve the elements "verde", "amarillo", "azul"
+
+```
+lista slice (3, 6)
+```
+
+
+### Excersice 4
+> Here we're creating an array in a range of (1 to 1000) with steps of 5 
+
+```
+Array.range(1, 1000, 5)
+```
+
+### Excersice 5
+> Here we need to retrieve the unique elements of a list
+
+```
+val mylist = List(1,3,3,4,6,7,3,7)  
+val newset = mylist.toSet
+```
+
+### Excersice 6
+> Here we are creating a mutable map with some elements
+
+```
+val mutmap = collection.mutable.Map(("Jose", 20), ("Luis", 24), ("Ana", 23), ("Susana", 27))
+```
+
+### Excersice 6a
+> Then we print the keys of the map
+
+```
+mutmap.keys
+```
+
+### Excersice 7b
+> We are adding a new element to the map
+
+```
+mutmap += ("Miguel" -> 23)
+```
+
+
+## Practice 3
+
+### Excersice 1
+> This function determines if the numbers of a list are odd or even and the displays them using a for loop
+
+```
+def listEvens(list:List[Int]): String ={
+    for(n <- list){
+        if(n%2==0){
+            println(s"$n is even")
+        }else{
+            println(s"$n is odd")
+        }
+    }
+    return "Done"
+}
+
+val l = List(1,2,3,4,5,6,7,8)
+val l2 = List(4,3,22,55,7,8)
+listEvens(l)
+listEvens(l2)
+```
+
+### Excersice 2
+> Here we have a function that evaluates the numbers of a list using the for loop, if the number is 7 then an operation is executed, else another operation is executed and the results are being stored in a variable
+
+```
+def afortunado(list:List[Int]): Int={
+    var res=0
+    for(n <- list){
+        if(n==7){
+            res = res + 14
+        }else{
+            res = res + n
+        }
+    }
+    return res
+}
+
+
+val af= List(1,7,7)
+println(afortunado(af))
+```
+
+
+### Excersice 3
+> Here we have a function that evaluates if the numbers in 3 lists are balanced
+
+```
+def balance(list:List[Int]): Boolean={
+    var primera = 0
+    var segunda = 0
+
+    segunda = list.sum
+
+    for(i <- Range(0,list.length)){
+        primera = primera + list(i)
+        segunda = segunda - list(i)
+
+        if(primera == segunda){
+            return true
+        }
+    }
+    return false 
+}
+
+val bl = List(3,2,1)
+val bl2 = List(2,3,3,2)
+val bl3 = List(10,30,90)
+
+balance(bl)
+balance(bl2)
+balance(bl3)
+```
+
+### Excersice 4
+> This function evaluates if a string is a palidrome
+
+```
+def palindromo(palabra:String):Boolean ={
+    return (palabra == palabra.reverse)
+}
+
+val palabra = "OSO"
+val palabra2 = "ANNA"
+val palabra3 = "JUAN"
+
+println(palindromo(palabra))
+println(palindromo(palabra2))
+println(palindromo(palabra3))
+```
