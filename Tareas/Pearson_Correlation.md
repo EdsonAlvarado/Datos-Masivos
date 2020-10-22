@@ -2,7 +2,22 @@
 
 > Diaz Urias Francisco Javier
 
-What is pair programming?
+What is Pearson's correlation?
 
-It requires two programmers to participate in a combined development effort at one job site. The person who is doing the coding is given the controller name while the person who is directing is called the browser. It is often suggested that the two partners switch roles at least every half hour or after a unit test is done. Ideally, the workspace should also accommodate the specific requirements of pair programming. Each worker must have their own mouse, keyboard and screen, which will always show the same information as the colleague's. Somewhat less common is the method called remote pair programming. In this case, the programmers do not sit together, but are located in completely different places. For this method to work, you must have special technical solutions. Even despite the distance, colleagues must have a direct line of communication and must be able to access the code and view modifications in real time.
-In practice, this is usually a collaboration between two developers with different degrees of experience: thus, a more experienced worker can pass on their knowledge to their younger colleagues directly through practice. For their part, a younger worker may come up with other ideas, perhaps more innovative, that they can contribute to the project.
+Pearson's correlation coefficient is a test that measures the statistical relationship between two continuous variables. If the association between the elements is not linear, then the coefficient is not adequately represented.
+The correlation coefficient can take a range of values ​​from +1 to -1. A value of 0 indicates that there is no association between the two variables. A value greater than 0 indicates a positive association. That is, as the value of one variable increases, so does the value of the other. A value less than 0 indicates a negative association; that is, as the value of one variable increases, the value of the other decreases.
+
+To carry out the Pearson correlation it is necessary to fulfill the following:
+
+The measurement scale must be an interval or ratio scale.
+The variables must be roughly distributed.
+The association must be linear.
+There should be no outliers in the data.
+
+The formula for Pearson's correlation coefficient is as follows:
+
+Where:
+
+"X" is equal to variable number one, "y" belongs to variable number two, "zx" is the standard deviation of variable one, "zy" is the standard deviation of variable two and "N" is is number of data.
+
+
