@@ -72,3 +72,38 @@ daymax.sort(desc("Close")).show
 df.select(max("Volume")).show
 df.select(min("Volume")).show
 ```
+
+### Exercise 11
+> This Exercise consists in several points...
+
+### a. 
+> How many days the column "Close" is less than $600?
+```
+df.filter($"Close" < 600).count()
+```
+
+### b. 
+> What percentage of the time the column "High" was greater than $500?
+```
+(df.filter($"High" > 500).count()*100)/df.count().toDouble
+```
+
+### c. 
+> What is the pearson correlation between the columns "High" and "Volume"?
+```
+df.select(corr("High", "Volume")).show()
+```
+
+### d. 
+> What is the max value of the column "High" by year?
+```
+val dfy = df.withColumn("Year", year(df("Date")))
+val ymax = dfy.select($"Year", $"High").groupBy("Year").max().show()
+```
+
+### e. 
+> What is the average of the column "Close" for each month?
+```
+val dfm = df.withColumn("Month", month(df("Date")))
+val mavg = dfm.select($"Month", $"Close").groupBy("Month").mean().show()
+```

@@ -33,4 +33,23 @@ daymax.sort(desc("Close")).show
 df.select(max("Volume")).show
 df.select(min("Volume")).show
 
+//11
 
+// a.
+df.filter($"Close" < 600).count()
+
+// b.
+(df.filter($"High" > 500).count()*100)/df.count().toDouble
+
+// c.
+df.select(corr("High", "Volume")).show()
+
+// d.
+
+val dfy = df.withColumn("Year", year(df("Date")))
+val ymax = dfy.select($"Year", $"High").groupBy("Year").max().show()
+
+// e.
+
+val dfm = df.withColumn("Month", month(df("Date")))
+val mavg = dfm.select($"Month", $"Close").groupBy("Month").mean().show()
