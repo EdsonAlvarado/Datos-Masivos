@@ -44,3 +44,26 @@ val testData = splits(1)
 
 // Se crean las capas de la red
 val layers = Array[Int](4, 5, 5, 3)
+
+// 7. Construya el modelos de clasificación y explique su arquitectura.
+// Se crea el entrenador del modelo y se le dan parametros
+val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures").setBlockSize(128).setSeed(System.currentTimeMillis).setMaxIter(200)
+
+// Se convierten de nuevo los indices a su forma original para poder utilizarlos en la prediccion
+val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labels)
+
+// Se crea el pipeline para el modelo
+val pipeline = new Pipeline().setStages(Array(labelIndexer, featureIndexer, trainer, labelConverter))
+
+// se entrena el modelo
+val model = pipeline.fit(trainingData)
+
+// Se hacen las predicciones con el modelo y mostramos algunos resultados
+val predictions = model.transform(testData)
+predictions.show(20)
+
+
+//8. Imprima los resultados del modelo
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
+val accuracy = evaluator.evaluate(predictions)
+println("Test Error = " + (1.0 - accuracy))
