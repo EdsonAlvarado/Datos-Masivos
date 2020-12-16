@@ -234,3 +234,278 @@ And we meassure the accuracy
 ```
 metrics.accuracy
 ```
+
+
+## Practice Basic Statistics
+### Correlation
+
+We import the necesary libraries 
+
+```
+import org.apache.spark.ml.linalg.{Matrix, Vectors}
+import org.apache.spark.ml.stat.Correlation
+import org.apache.spark.sql.Row
+```
+
+
+We create a new value name data that contains some vectors
+
+```
+val data = Seq(
+  Vectors.sparse(4, Seq((0, 1.0), (3, -2.0))),
+  Vectors.dense(4.0, 5.0, 0.0, 3.0),
+  Vectors.dense(6.0, 7.0, 0.0, 8.0),
+  Vectors.sparse(4, Seq((0, 9.0), (3, 1.0)))
+)
+```
+
+Then we create a new dataframe using the data column to features
+```
+val df = data.map(Tuple1.apply).toDF("features")
+```
+
+Here we print the matrix of the first coeficient of Person correlation
+```
+val Row(coeff1: Matrix) = Correlation.corr(df, "features").head
+println(s"Pearson correlation matrix:\n $coeff1")
+```
+
+And here we print the matrix of the second coeficient of Person correlation
+```
+val Row(coeff2: Matrix) = Correlation.corr(df, "features", "spearman").head
+println(s"Spearman correlation matrix:\n $coeff2")
+```
+
+### Hypothesis
+
+As usual the first thing is the libraries 
+```
+import org.apache.spark.ml.linalg.{Vector, Vectors}
+import org.apache.spark.ml.stat.ChiSquareTest
+```
+
+We create a data value that holds all the following vectors
+```
+val data = Seq(
+  (0.0, Vectors.dense(0.5, 10.0)),
+  (0.0, Vectors.dense(1.5, 20.0)),
+  (1.0, Vectors.dense(1.5, 30.0)),
+  (0.0, Vectors.dense(3.5, 30.0)),
+  (0.0, Vectors.dense(3.5, 40.0)),
+  (1.0, Vectors.dense(3.5, 40.0))
+)
+```
+
+We create a new dataframe using label and features
+```
+val df = data.toDF("label", "features")
+```
+
+We declare a variable named chi to user the ChiSquareTest
+```
+val chi = ChiSquareTest.test(df, "features", "label").head
+```
+
+And we print the results
+```
+println(s"pValues = ${chi.getAs[Vector](0)}")
+println(s"degreesOfFreedom ${chi.getSeq[Int](1).mkString("[", ",", "]")}")
+println(s"statistics ${chi.getAs[Vector](2)}")
+```
+
+### Summarizer
+
+We import our libraries
+```
+import org.apache.spark.ml.linalg.{Vector, Vectors}
+import org.apache.spark.ml.stat.Summarizer
+```
+
+We create a data value holding 2 vectors
+```
+val data = Seq(
+  (Vectors.dense(2.0, 3.0, 5.0), 1.0),
+  (Vectors.dense(4.0, 6.0, 7.0), 2.0)
+)
+```
+
+We create a new dataframe using features and weight
+```
+val df = data.toDF("features", "weight")
+```
+
+
+We declare the values "meanVal" and "varianceVal" to calculate the mean and the variance using the corresponding columns and printing the result using weight
+```
+val (meanVal, varianceVal) = df.select(metrics("mean", "variance").summary($"features", $"weight").as("summary")).select("summary.mean", "summary.variance").as[(Vector, Vector)].first()
+println(s"with weight: mean = ${meanVal}, variance = ${varianceVal}")
+```
+
+
+We declare the values "meanVal" and "varianceVal" to calculate the mean and the variance using the corresponding columns and printing the result without weight
+```
+val (meanVal2, varianceVal2) = df.select(mean($"features"), variance($"features")).as[(Vector, Vector)].first()
+println(s"without weight: mean = ${meanVal2}, sum = ${varianceVal2}")
+```
+
+## Practice Decision Tree
+
+First we import the following libraries
+```
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.classification.DecisionTreeClassificationModel
+import org.apache.spark.ml.classification.DecisionTreeClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+import org.apache.spark.ml.feature.{IndexToString, StringIndexer, VectorIndexer}
+```
+
+We create a spark session
+```
+import org.apache.spark.sql.SparkSession
+```
+
+We create the object of our program
+```
+object DecisionTree {
+  def main(args: Array[String]): Unit = {
+    val spark = SparkSession
+      .builder
+      .appName("dtree")
+      .getOrCreate()
+ ```
+
+Load the data stored in LIBSVM format as a DataFrame.
+```
+val data = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+```
+
+Index labels, adding metadata to the label column.
+Fit on whole dataset to include all labels in index.
+```
+val labelIndexer = new StringIndexer().setInputCol("label").setOutputCol("indexedLabel").fit(data)
+```
+Automatically identify categorical features, and index them.
+```
+val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4).fit(data)
+```
+
+Split the data into training and test sets (30% held out for testing).
+```
+val Array(trainingData, testData) = data.randomSplit(Array(0.7, 0.3))
+```
+
+Train a DecisionTree model.
+```
+val dt = new DecisionTreeClassifier().setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures")
+```
+
+Convert indexed labels back to original labels.
+```
+val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labels)
+```
+
+Chain indexers and tree in a Pipeline.
+```
+val pipeline = new Pipeline().setStages(Array(labelIndexer, featureIndexer, dt, labelConverter))
+```
+
+Train model. This also runs the indexers.
+```
+val model = pipeline.fit(trainingData)
+```
+
+Make predictions.
+```
+val predictions = model.transform(testData)
+```
+
+Select example rows to display.
+```
+predictions.select("predictedLabel", "label", "features").show(10)
+```
+
+Select (prediction, true label) and compute test error.
+```
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
+val accuracy = evaluator.evaluate(predictions)
+println(s"Test Error = ${(1.0 - accuracy)}")
+
+val treeModel = model.stages(2).asInstanceOf[DecisionTreeClassificationModel]
+println(s"Learned classification tree model:\n ${treeModel.toDebugString}")
+
+  }
+}
+```
+
+## Practice Gradient Boosted Tree Classifier
+
+We import our libraries
+```
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.classification.{GBTClassificationModel, GBTClassifier}
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+import org.apache.spark.ml.feature.{IndexToString, StringIndexer, VectorIndexer}
+```
+
+Here we load our data file
+```
+val data = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+```
+
+Here we add metadata to the label column and fit the values in indexedLabel
+```
+val labelIndexer = new StringIndexer().setInputCol("label").setOutputCol("indexedLabel").fit(data)
+```
+
+Here the categories are identified and are seted to 4 categories
+```
+val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4).fit(data)
+```
+
+We split the data in training and test (70%, 30%)
+```
+val Array(trainingData, testData) = data.randomSplit(Array(0.7, 0.3))
+```
+Here we create our GBt model
+```
+val gbt = new GBTClassifier().setLabelCol("indexedLabel").setFeaturesCol("indexedFeatures").setMaxIter(10).setFeatureSubsetStrategy("auto")
+```
+
+And here we convert the indexes to its original values
+```
+val labelConverter = new IndexToString().setInputCol("prediction").setOutputCol("predictedLabel").setLabels(labelIndexer.labels)
+```
+
+We chain the indexers and the model to a pipeline
+```
+val pipeline = new Pipeline().setStages(Array(labelIndexer, featureIndexer, gbt, labelConverter))
+```
+
+The model is trained using the training data
+```
+val model = pipeline.fit(trainingData)
+```
+
+we make de predictions
+```
+val predictions = model.transform(testData)
+```
+
+Here we select our columns and the number of rows to show
+```
+predictions.select("predictedLabel", "label", "features").show(5)
+```
+
+Select (prediction, true label) and compute test error.
+
+```
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("indexedLabel").setPredictionCol("prediction").setMetricName("accuracy")
+val accuracy = evaluator.evaluate(predictions)
+println(s"Test Error = ${1.0 - accuracy}")
+```
+
+Finally we print the results
+```
+val gbtModel = model.stages(2).asInstanceOf[GBTClassificationModel]
+println(s"Learned classification GBT model:\n ${gbtModel.toDebugString}")
+```
