@@ -509,3 +509,163 @@ Finally we print the results
 val gbtModel = model.stages(2).asInstanceOf[GBTClassificationModel]
 println(s"Learned classification GBT model:\n ${gbtModel.toDebugString}")
 ```
+
+## Practice Multilayer Perceptron Classifier
+
+Import the libraries 
+```
+import org.apache.spark.ml.classification.MultilayerPerceptronClassifier
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+```
+
+Load the file
+```
+val data = spark.read.format("libsvm").load("sample_multiclass_classification_data.txt")
+```
+
+Split the data, 60% of training and 40% of test with seed
+```
+val splits = data.randomSplit(Array(0.6, 0.4), seed = 1234L)
+val train = splits(0)
+val test = splits(1)
+```
+
+Make the grid layers, input layer of 4, 2 hidden layers: one of 5 and the other of 4, the final layer of 3
+```
+val layers = Array[Int](4, 5, 4, 3)
+```
+
+Create the model of trainer and give parameters
+```
+val trainer = new MultilayerPerceptronClassifier().setLayers(layers).setBlockSize(128).setSeed(1234L).setMaxIter(100)
+```
+
+Train the model
+```
+val model = trainer.fit(train)
+```
+
+Calculate the accuracy of the model
+```
+val result = model.transform(test)
+val predictionAndLabels = result.select("prediction", "label")
+val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
+```
+
+Print the result of accuracy
+```
+println(s"Test set accuracy = ${evaluator.evaluate(predictionAndLabels)}")
+```
+
+## Practice Linear Support Vector Machine
+
+Import the libraries
+```
+import org.apache.spark.ml.classification.LinearSVC
+```
+
+Load the file
+```
+val training = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
+```
+
+Create the model
+```
+val lsvcModel = lsvc.fit(training)
+```
+
+Print the coefficients and intercepts for linear static compensator
+```
+println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
+```
+
+## Practice One vs Rest
+
+Import the libraries
+```
+import org.apache.spark.ml.classification.{LogisticRegression, OneVsRest}
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+```
+
+Load the file
+```
+val inputData = spark.read.format("libsvm").load("sample_multiclass_classification_data.txt")
+```
+
+Split the data, 80% of training and 20% of test
+```
+val Array(train, test) = inputData.randomSplit(Array(0.8, 0.2))
+```
+
+Create the instance of the classificator with the interaction of 10 and adjust
+```
+val classifier = new LogisticRegression().setMaxIter(10).setTol(1E-6).setFitIntercept(true)
+```
+
+Create the instance of the model One vs Rest
+```
+// Se crea una instancia del modelo One vs Rest 
+val ovr = new OneVsRest().setClassifier(classifier)
+```
+
+Train the model
+```
+val ovrModel = ovr.fit(train)
+```
+
+Create the variable predictions and a transform applied the data of test
+```
+val predictions = ovrModel.transform(test)
+```
+
+Create the evaluator of classificator and asign the name accuracy
+```
+val evaluator = new MulticlassClassificationEvaluator().setMetricName("accuracy")
+```
+
+Calculate the accuracy of evaluator and print the test error
+```
+val accuracy = evaluator.evaluate(predictions)
+println(s"Test Error = ${1 - accuracy}")
+````
+
+## Practice Naive Bayes
+
+Import the libraries
+```
+import org.apache.spark.ml.classification.NaiveBayes
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+```
+
+Create the value data to load the file
+```
+val data = spark.read.format("libsvm").load("sample_libsvm_data.txt")
+````
+
+Split the data 70% of training and 30% of test
+```
+val Array(trainingData, testData) = data.randomSplit(Array(0.7, 0.3), seed = 1234L)
+```
+
+Train the model 
+```
+val model = new NaiveBayes().fit(trainingData)
+```
+
+Select example files to show
+```
+val predictions = model.transform(testData)
+predictions.show()
+```
+
+Select (the prediction and label) and calculate the test error
+```
+val evaluator = new MulticlassClassificationEvaluator().setLabelCol("label").setPredictionCol("prediction").setMetricName("accuracy")
+val accuracy = evaluator.evaluate(predictions)
+```
+
+Print the accuracy
+```
+println(s"Test set accuracy = $accuracy")
+```
