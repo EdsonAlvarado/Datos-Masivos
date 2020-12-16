@@ -11,10 +11,13 @@ import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
 import org.apache.spark.ml.classification.MultilayerPerceptronClassificationModel
 import org.apache.log4j._
 Logger.getLogger("org").setLevel(Level.ERROR)
+```
 
-// Se crea sesion de Spark
+> Create Spark Session
+```
 import org.apache.spark.sql.SparkSession
 ```
+
 ### Point 1
 
 > Load the file "iris.csv" 
