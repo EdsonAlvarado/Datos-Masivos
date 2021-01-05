@@ -2,7 +2,40 @@
 Final Project
 
 
-### Decision Tree
+## 1. Introduction
+
+Machine learning is a discipline in which the systems developed learn complex patterns automatically to predict future behaviors
+based on a data collection. These systems are developed using algorithms that help us to classify and analyze the data, in this 
+project we are going to see and compare some of these algorithms. 
+
+## 2. Algorithms
+### 2.1 Decision Tree
+Decision tree is the most powerful and popular tool for classification and prediction. A Decision tree is a flowchart like tree structure, where each internal node denotes a test on an attribute, each branch represents an outcome of the test, and each leaf node (terminal node) holds a class label.
+
+![alt text](https://www.geeksforgeeks.org/wp-content/uploads/Decision_Tree-2.png)
+
+### 2.2 Random Forest
+Random forest, like its name implies, consists of a large number of individual decision trees that operate as an ensemble. Each individual tree in the random forest spits out a class prediction and the class with the most votes becomes our model’s prediction.
+
+Each tree is grown as follows:
+
+1. If the number of cases in the training set is N, sample N cases at random - but with replacement, from the original data. This sample will be the training set for growing the tree.
+2. If there are M input variables, a number m<<M is specified such that at each node, m variables are selected at random out of the M and the best split on these m is used to split the node. The value of m is held constant during the forest growing.
+3. Each tree is grown to the largest extent possible. There is no pruning.
+
+In the original paper on random forests, it was shown that the forest error rate depends on two things:
+
+1. The correlation between any two trees in the forest. Increasing the correlation increases the forest error rate.
+2. The strength of each individual tree in the forest. A tree with a low error rate is a strong classifier. Increasing the strength of the individual trees decreases the forest error rate.
+
+![alt text](https://miro.medium.com/max/500/1*VHDtVaDPNepRglIAv72BFg.jpeg)
+
+### 2.3 Gradient Boosted Tree
+
+### 2.4 Naive Bayes
+
+## 3. Results tables
+### 3.1 Decision Tree
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 1 | 0.931 | 0.068 | 245 | 391 | 650 | 910 | 11.951 |
@@ -17,7 +50,7 @@ Final Project
 | 10 | 0.962 | 0.037 | 327 | 330 | 682 | 910 | 3.743 |
 | Average | 0.9627 | 0.0367  | 331  | 354  | 678  | 910  | 4.371 |
 
-### Random Forest
+### 3.2 Random Forest
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 1 | 0.947 | 0.052 | 351 | 408 | 773 | 910 | 12.944 |
@@ -33,7 +66,7 @@ Final Project
 | Average | 0.9742 | 0.0253  | 353  | 433  | 803  | 910  | 4.659 |
 
 
-### Gradient Boosted Tree 
+### 3.3 Gradient Boosted Tree 
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 1	| 0.966 | 0.033 |	227 |	578 |	823 |	954 | 9 |
@@ -48,7 +81,7 @@ Final Project
 | 10 | 0.937 | 0.062 | 325 | 468 | 818 | 954 | 7 |
 | Average | 0.947 | 0.052 | 327  | 472.8 | 819.8 | 954  | 7.3 |
 
-### Naive Bayes 
+### 3.4 Naive Bayes 
 
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
