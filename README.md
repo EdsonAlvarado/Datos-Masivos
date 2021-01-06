@@ -32,7 +32,11 @@ In the original paper on random forests, it was shown that the forest error rate
 
 ### 2.3 Gradient Boosted Tree
 
+![alt text](https://www.researchgate.net/profile/Yoonseok_Shin2/publication/281513259/figure/fig4/AS:317672093962245@1452750337241/Gradient-boosted-decision-tree-ensemble.png)
+
 ### 2.4 Naive Bayes
+
+![alt text](https://images.deepai.org/glossary-terms/0f7ab6cd59a845a1a3e4225ebe718171/naive_bayes.png)
 
 ## 3. Results tables
 ### 3.1 Decision Tree
