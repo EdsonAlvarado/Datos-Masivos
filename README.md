@@ -106,5 +106,5 @@ In the original paper on random forests, it was shown that the forest error rate
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | Decision Tree |	0.9627	| 0.0367 |	331 | 4.371 |
 | Random Forest |	0.9742 | 0.0253  | 353 | 4.659 |
-| Gradient Boosted Tree |	0.947 | 0.052 | 327 |	2 |
+| Gradient Boosted Tree |	0.947 | 0.052 | 327 |	7.3 |
 | Naive Bayes |	1 |	1 |	321 | 3.2 |
