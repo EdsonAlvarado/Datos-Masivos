@@ -12,7 +12,7 @@ project we are going to see and compare some of these algorithms.
 ### 2.1 Decision Tree
 Decision tree is the most powerful and popular tool for classification and prediction. A Decision tree is a flowchart like tree structure, where each internal node denotes a test on an attribute, each branch represents an outcome of the test, and each leaf node (terminal node) holds a class label.
 
-![alt text](https://www.geeksforgeeks.org/wp-content/uploads/Decision_Tree-2.png)
+![alt text](https://cdn.analyticsvidhya.com/wp-content/uploads/2020/05/rfc_vs_dt11.png)
 
 ### 2.2 Random Forest
 Random forest, like its name implies, consists of a large number of individual decision trees that operate as an ensemble. Each individual tree in the random forest spits out a class prediction and the class with the most votes becomes our model’s prediction.
@@ -28,7 +28,7 @@ In the original paper on random forests, it was shown that the forest error rate
 1. The correlation between any two trees in the forest. Increasing the correlation increases the forest error rate.
 2. The strength of each individual tree in the forest. A tree with a low error rate is a strong classifier. Increasing the strength of the individual trees decreases the forest error rate.
 
-![alt text](https://miro.medium.com/max/500/1*VHDtVaDPNepRglIAv72BFg.jpeg)
+![alt text](https://cdn.analyticsvidhya.com/wp-content/uploads/2020/02/rfc_vs_dt1.png)
 
 ### 2.3 Gradient Boosted Tree
 
