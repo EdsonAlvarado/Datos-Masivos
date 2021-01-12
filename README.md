@@ -12,7 +12,7 @@ project we are going to see and compare some of these algorithms.
 ### 2.1 Decision Tree
 Decision tree is the most powerful and popular tool for classification and prediction. A Decision tree is a flowchart like tree structure, where each internal node denotes a test on an attribute, each branch represents an outcome of the test, and each leaf node (terminal node) holds a class label.
 
-![alt text](https://www.geeksforgeeks.org/wp-content/uploads/Decision_Tree-2.png)
+![alt text](https://cdn.analyticsvidhya.com/wp-content/uploads/2020/05/rfc_vs_dt11.png)
 
 ### 2.2 Random Forest
 Random forest, like its name implies, consists of a large number of individual decision trees that operate as an ensemble. Each individual tree in the random forest spits out a class prediction and the class with the most votes becomes our model’s prediction.
@@ -28,11 +28,15 @@ In the original paper on random forests, it was shown that the forest error rate
 1. The correlation between any two trees in the forest. Increasing the correlation increases the forest error rate.
 2. The strength of each individual tree in the forest. A tree with a low error rate is a strong classifier. Increasing the strength of the individual trees decreases the forest error rate.
 
-![alt text](https://miro.medium.com/max/500/1*VHDtVaDPNepRglIAv72BFg.jpeg)
+![alt text](https://cdn.analyticsvidhya.com/wp-content/uploads/2020/02/rfc_vs_dt1.png)
 
 ### 2.3 Gradient Boosted Tree
 
+![alt text](https://www.researchgate.net/profile/Yoonseok_Shin2/publication/281513259/figure/fig4/AS:317672093962245@1452750337241/Gradient-boosted-decision-tree-ensemble.png)
+
 ### 2.4 Naive Bayes
+
+![alt text](https://images.deepai.org/glossary-terms/0f7ab6cd59a845a1a3e4225ebe718171/naive_bayes.png)
 
 ## 3. Results tables
 ### 3.1 Decision Tree
@@ -96,3 +100,11 @@ In the original paper on random forests, it was shown that the forest error rate
 | 9	| 1 |	1 |	363 |	415 |	796 |	954 | 2 |
 | 10 | 1 | 1 | 259 | 525 | 803 | 954 | 2 |
 | Average |	1 |	1	| 321	|	440	| 775	| 954 | 3.2 |
+
+### Comparison (Averages)
+| Algorithm | Accuracy | Error | Used memory | Time (seconds)
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| Decision Tree |	0.9627	| 0.0367 |	331 | 4.371 |
+| Random Forest |	0.9742 | 0.0253  | 353 | 4.659 |
+| Gradient Boosted Tree |	0.947 | 0.052 | 327 |	7.3 |
+| Naive Bayes |	1 |	1 |	321 | 3.2 |
