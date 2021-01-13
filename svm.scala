@@ -14,15 +14,9 @@ val t1 = System.nanoTime
 
 val data  = spark.read.option("header","true").option("inferSchema", "true").option("delimiter", ",").format("csv").load("bank.csv")
 
-
-// columns: age, job, marital, education, default, housing, loan, poutcome, all social and economic
 val data_select = data.select($"age", $"job", $"marital", $"education", $"default", $"housing", $"loan", $"poutcome", $"emp_var_rate", $"cons_price_idx", $"cons_conf_idx", $"euribor3m", $"nr_employed", $"y")
 
-val labelIndexer = new StringIndexer().setInputCol("y").setOutputCol("label")
-
-val labelfit = labelIndexer.fit(data_select)
-val df = labelfit.transform(data)
-
+// Convert categorical data to a vector first indexing them and then converting them to a vector with OneHotEncoder
 
 val jobIndexer = new StringIndexer().setInputCol("job").setOutputCol("jobIndex")
 val maritalIndexer = new StringIndexer().setInputCol("marital").setOutputCol("maritalIndex")
@@ -41,33 +35,43 @@ val housEncoder = new OneHotEncoder().setInputCol("housIndex").setOutputCol("hou
 val loanEncoder = new OneHotEncoder().setInputCol("loanIndex").setOutputCol("loanVec")
 val poutEncoder = new OneHotEncoder().setInputCol("poutIndex").setOutputCol("poutVec")
 
-val assembler = (new VectorAssembler().setInputCols(Array("age","jobVec", "marVec","eduVec","defVec","housVec","loanVec", "poutVec", "emp_var_rate", 
-"cons_price_idx", "cons_conf_idx", "euribor3m", "nr_employed")).setOutputCol("features"))
+// Convert our label to an index
 
-val Array(training, test) = df.randomSplit(Array(0.7, 0.3), seed = 12345)
+val labelIndexer = new StringIndexer().setInputCol("y").setOutputCol("label")
+
+// Use the vector assembler to combine all features
+
+val assembler = (new VectorAssembler().setInputCols(Array("age","jobVec", "marVec","eduVec","defVec","housVec","loanVec", "poutVec", 
+"emp_var_rate", "cons_price_idx", "cons_conf_idx", "euribor3m", "nr_employed")).setOutputCol("features"))
+
+// Create the pipeline with our stages
+
+val partialPipeline = new Pipeline().setStages(Array(jobIndexer,maritalIndexer,eduIndexer,defaultIndexer,housingIndexer,loanIndexer,poutIndexer,
+jobEncoder,maritalEncoder,eduEncoder,defEncoder,housEncoder,loanEncoder,poutEncoder, labelIndexer ,assembler))
+
+val pipelineModel = partialPipeline.fit(data_select)
+
+val prepped_data = pipelineModel.transform(data_select)
+
+val final_data = prepped_data.select($"age", $"job", $"marital", $"education", $"default", $"housing", $"loan", $"poutcome", $"emp_var_rate", $"cons_price_idx", 
+  $"cons_conf_idx", $"euribor3m", $"nr_employed", $"y", $"label", $"features")
+
+// Split the data into training and test sets (30% held out for testing).
+val Array(trainingData, testData) = final_data.randomSplit(Array(0.7, 0.3))
 
 val lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1)
 
+// Fit the model
+val lsvcModel = lsvc.fit(trainingData)
 
-
-val pipeline = new Pipeline().setStages(Array(jobIndexer,maritalIndexer,eduIndexer,defaultIndexer,housingIndexer,loanIndexer,poutIndexer,
-jobEncoder,maritalEncoder,eduEncoder,defEncoder,housEncoder,loanEncoder,poutEncoder ,assembler,lsvc))
-
-// Se construye el modelo
-//val lsvcModel = lsvc.fit(training)
-
-val model = pipeline.fit(training)
-val results = model.transform(test)
+val results = lsvcModel.transform(testData)
 
 
 val predictionAndLabels = results.select($"prediction",$"label").as[(Double, Double)].rdd
 val metrics = new MulticlassMetrics(predictionAndLabels)
 
-// Se imprime los coeficientes e intercepta para el compensador estatico lineal
-//println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
-
-println("Confusion matrix:")
-println(metrics.confusionMatrix)
+// Print the coefficients and intercept for linear svc
+println(s"Coefficients: ${lsvcModel.coefficients} Intercept: ${lsvcModel.intercept}")
 
 println("Accuracy: " + metrics.accuracy) 
 println(s"Test Error = ${(1.0 - metrics.accuracy)}")
@@ -82,3 +86,4 @@ println("** Total Memory: " + runtime.totalMemory / mb)
 println("** Max Memory:   " + runtime.maxMemory / mb)
 
 val duration = (System.nanoTime - t1) / 1e9d
+
