@@ -206,4 +206,22 @@ We can see that the Decision Tree Classsifier method obtained the highest precis
 
 ## 6. References
 
+Pant, A. (2019, 22 enero). Introduction to Logistic Regression - Towards Data Science. medium. https://towardsdatascience.com/introduction-to-logistic-regression-66248243c148
+
+Molnar, C. (2021, 11 enero). Interpretable Machine Learning. Github. https://christophm.github.io/interpretable-ml-book/logistic.html
+
+
+Karim, M. R. (2018, 3 enero). Deep Learning via Multilayer Perceptron Classifier. dzone.com. https://dzone.com/articles/deep-learning-via-multilayer-perceptron-classifier
+
+Gupta, P. (2018, 20 junio). Decision Trees in Machine Learning - Towards Data Science. Medium. https://towardsdatascience.com/decision-trees-in-machine-learning-641b9c4e8052
+
+Apache. (s. f.). Classification and regression - Spark 2.4.7 Documentation. Spark.apache.org. Recuperado 13 de enero de 2021, de https://spark.apache.org/docs/2.4.7/ml-classification-regression.html
+
+Gandhi, R. (2018, 5 julio). Support Vector Machine — Introduction to Machine Learning Algorithms. Medium. https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47
+
+Rodrigo, J. A. (s. f.). Máquinas de Vector Soporte (Support Vector Machines, SVMs). cienciadedatos. Recuperado 13 de enero de 2021, de https://www.cienciadedatos.net/documentos/34_maquinas_de_vector_soporte_support_vector_machines
+
+The Scala Programming Language. (s. f.). scala-lang.org. Recuperado 13 de enero de 2021, de https://www.scala-lang.org/
+
+Apache SparkTM - Unified Analytics Engine for Big Data. (s. f.). spark.apache.org. Recuperado 13 de enero de 2021, de https://spark.apache.org/
 
