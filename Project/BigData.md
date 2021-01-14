@@ -1,14 +1,18 @@
 # Big Data
 Final Project
 
+## Index 
 
-## 1. Introduction
+1. [Introduction](#introduction)
+2. [Theoretical framework](#framework)
+
+## 1. Introduction <a name="introduction"></a>
 
 Machine learning is a discipline in which the systems developed learn complex patterns automatically to predict future behaviors
 based on a data collection. These systems are developed using algorithms that help us to classify and analyze the data, in this 
 project we are going to see and compare some of these algorithms. 
 
-## 2. Theoretical framework
+## 2. Theoretical framework <a name="framework"></a>
 ### 2.1 Decision Tree
 Decision tree is the most powerful and popular tool for classification and prediction. A Decision tree is a flowchart like tree structure, where each internal node denotes a test on an attribute, each branch represents an outcome of the test, and each leaf node (terminal node) holds a class label.
 
