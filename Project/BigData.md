@@ -3,8 +3,16 @@ Final Project
 
 ## Index 
 
-1. [Introduction](#introduction)
-2. [Theoretical framework](#framework)
+### 1. [Introduction](#introduction)
+### 2. [Theoretical framework](#framework)
+   * [Decision Tree](#tree)
+   * [Support Vector Machine](#support)
+   * [Logistic Regression](#lr)
+   * [Multilayer perceptron](#multi)
+### 3. [Implementation](#implementation)
+### 4. [Results](#results)
+### 5. [Conclusion](#conclusion)
+### 6. [References](#references)
 
 ## 1. Introduction <a name="introduction"></a>
 
@@ -13,7 +21,7 @@ based on a data collection. These systems are developed using algorithms that he
 project we are going to see and compare some of these algorithms. 
 
 ## 2. Theoretical framework <a name="framework"></a>
-### 2.1 Decision Tree
+### 2.1 Decision Tree <a name="tree"></a>
 Decision tree is the most powerful and popular tool for classification and prediction. A Decision tree is a flowchart like tree structure, where each internal node denotes a test on an attribute, each branch represents an outcome of the test, and each leaf node (terminal node) holds a class label.
 
 A decision tree can be used to visually and explicitly represent decisions and decision making. As the name goes, it uses a tree-like model of decisions. Though a commonly used tool in data mining for deriving a strategy to reach a particular goal, its also widely used in machine learning.
@@ -48,7 +56,7 @@ Disadvantages
  * Decision tree learners create biased trees if some classes dominate. It is therefore recommended to balance the data set prior to fitting with the decision tree.
 
 
-### 2.2 Support Vector Machine
+### 2.2 Support Vector Machine <a name="support"></a>
 
 The objective of the support vector machine algorithm is to find a hyperplane in an N-dimensional space(N — the number of features) that distinctly classifies the data points.
 Image for post.
@@ -92,7 +100,7 @@ Disadvantages
 * In cases where the number of features for each data point exceeds the number of training data samples, the SVM will underperform.
 * As the support vector classifier works by putting data points, above and below the classifying hyperplane there is no probabilistic explanation for the classification.
 
-### 2.3 Logistic Regression
+### 2.3 Logistic Regression <a name="lr"></a>
 Logistic regression models the probabilities for classification problems with two possible outcomes. It's an extension of the linear regression model for classification problems.
 
 We can call a Logistic Regression a Linear Regression model but the Logistic Regression uses a more complex cost function, this cost function can be defined as the ‘Sigmoid function’ or also known as the ‘logistic function’ instead of a linear function.
@@ -101,7 +109,7 @@ The hypothesis of logistic regression tends it to limit the cost function betwee
 
 ![alt text](https://miro.medium.com/max/223/1*GnceHPIeThNShGSmYzE4eA.png)
 
-### 2.4 Multilayer perceptron
+### 2.4 Multilayer perceptron <a name="multi"></a>
 A multilayer perceptron (MLP) is a class of feedforward artificial neural network (ANN). The term MLP is used ambiguously, sometimes loosely to any feedforward ANN, sometimes strictly to refer to networks composed of multiple layers of perceptrons (with threshold activation); see § Terminology. Multilayer perceptrons are sometimes colloquially referred to as "vanilla" neural networks, especially when they have a single hidden layer.
 
 An MLP consists of at least three layers of nodes: an input layer, a hidden layer and an output layer. Except for the input nodes, each node is a neuron that uses a nonlinear activation function. MLP utilizes a supervised learning technique called backpropagation for training. Its multiple layers and non-linear activation distinguish MLP from a linear perceptron. It can distinguish data that is not linearly separable.
@@ -119,7 +127,7 @@ To train a Spark ML based multilayer perceptron classifier, the following parame
 
 Layer, Tolerance of iteration, Block size of the learning, Seed size, Max iteration number
 
-## 3. Implementation
+## 3. Implementation <a name="implementation"></a>
 
 For this project we're going to use the following tools:
 
@@ -133,7 +141,7 @@ Scala is a high level language that combines functional and object oriented prog
 Scala is a powerful language that can leverage many of the same functions as Python, such as building machine learning models.
 
 
-## 4. Results tables
+## 4. Results tables <a name="results"></a>
 ### 4.1 Decision Tree
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
@@ -204,11 +212,11 @@ Scala is a powerful language that can leverage many of the same functions as Pyt
 | Logistic Regression | 0.883 | 0.1131 | 406  | 375 | 676  | 910  | 13.5 |
 | Multilayer perceptron |	0.883 |	0.112	| 572	|	239	| 835 | 942	 | 16.2 |
 
-## 5. Conclusion
+## 5. Conclusion <a name="conclusion"></a>
 
 We can see that the Decision Tree Classsifier method obtained the highest precision, while Logistic Regression and Multilayer Perceptron obtained the lowest precision compared to the 4 methods. In the Error Test Decision Tree Classifier is again better compared to the other methods, obtaining a lower error test, instead Logistic Regression obtains the highest Error Test which makes it the worst of the 4 methods.
 
-## 6. References
+## 6. References <a name="references"></a>
 
 Pant, A. (2019, 22 enero). Introduction to Logistic Regression - Towards Data Science. medium. https://towardsdatascience.com/introduction-to-logistic-regression-66248243c148
 
