@@ -28,72 +28,39 @@ Regression --> sum(y — prediction)²
 
 The decision tree will start splitting by considering each feature in training data. The mean of responses of the training data inputs of particular group is considered as prediction for that group. The above function is applied to all data points and cost is calculated for all candidate splits. Again the split with lowest cost is chosen. 
 
-Advantages
-
-* Simple to understand, interpret, visualize.
-* Decision trees implicitly perform variable screening or feature selection.
-* Can handle both numerical and categorical data. Can also handle multi-output problems.
-* Decision trees require relatively little effort from users for data preparation.
-* Nonlinear relationships between parameters do not affect tree performance.
-
-Disadvantages
-
-* Decision-tree learners can create over-complex trees that do not generalize the data well. This is called overfitting.
-* Decision trees can be unstable because small variations in the data might result in a completely different tree being generated. This is called variance, which needs to be lowered   by methods like bagging and boosting.
-* Greedy algorithms cannot guarantee to return the globally optimal decision tree. This can be mitigated by training multiple trees, where the features and samples are randomly sampled with replacement.
- * Decision tree learners create biased trees if some classes dominate. It is therefore recommended to balance the data set prior to fitting with the decision tree.
-
 ### 2.2 Support Vector Machine
 
-The objective of the support vector machine algorithm is to find a hyperplane in an N-dimensional space(N — the number of features) that distinctly classifies the data points.
-Image for post.
-To separate the two classes of data points, there are many possible hyperplanes that could be chosen. Our objective is to find a plane that has the maximum margin, i.e the maximum distance between data points of both classes. Maximizing the margin distance provides some reinforcement so that future data points can be classified with more confidence.
-
-
-![alt text](https://miro.medium.com/max/700/1*ZpkLQf2FNfzfH4HXeMw4MQ.png)
-
-Support vectors are data points that are closer to the hyperplane and influence the position and orientation of the hyperplane. Using these support vectors, we maximize the margin of the classifier. 
-
-The mathematic definition of the hyperplane can be described by an equation:
-
-β0+β1x1+β2x2=0
-
-Given the parameters β0, β1 y β2, and all the paired values x=(x1,x2) para los que se cumple la igualdad son puntos del hiperplano. Esta ecuación puede generalizarse para n-dimensiones: for which the equality is fulfilled are points in the hyperplane. This equation can be generalized for n-dimensions
-
-β0+β1x1+β2x2+...+βnxn=0
-and for all the points defined by the vector (x=x1,x2,...,xn) which fulfill the equation belongs to the hyperplane
-
-
-When x
-do not fulfill the equation:
-β0+β1x1+β2x2+...+βnxn<0
-
-or
-
-β0+β1x1+β2x2+...+βnxn>0
-x falls to one side of the hyperplane. An hyperplane divides an space of n-dimensions in two. If we need to know at what wise a point x falls we just need to calculate the sign of the equation.
-
-Advantages
-
-* SVM works relatively well when there is a clear margin of separation between classes.
-* SVM is more effective in high dimensional spaces.
-* SVM is effective in cases where the number of dimensions is greater than the number of samples.
-* SVM is relatively memory efficient
-
-Disadvantages
-
-* SVM algorithm is not suitable for large data sets.
-* SVM does not perform very well when the data set has more noise i.e. target classes are overlapping.
-* In cases where the number of features for each data point exceeds the number of training data samples, the SVM will underperform.
-* As the support vector classifier works by putting data points, above and below the classifying hyperplane there is no probabilistic explanation for the classification.
 
 ### 2.3 Logistic Regression
+Logistic regression models the probabilities for classification problems with two possible outcomes. It's an extension of the linear regression model for classification problems.
 
+We can call a Logistic Regression a Linear Regression model but the Logistic Regression uses a more complex cost function, this cost function can be defined as the ‘Sigmoid function’ or also known as the ‘logistic function’ instead of a linear function.
 
+The hypothesis of logistic regression tends it to limit the cost function between 0 and 1. Therefore linear functions fail to represent it as it can have a value greater than 1 or less than 0 which is not possible as per the hypothesis of logistic regression.
+
+![alt text](https://miro.medium.com/max/223/1*GnceHPIeThNShGSmYzE4eA.png)
 
 ### 2.4 Multilayer perceptron
+A multilayer perceptron (MLP) is a class of feedforward artificial neural network (ANN). The term MLP is used ambiguously, sometimes loosely to any feedforward ANN, sometimes strictly to refer to networks composed of multiple layers of perceptrons (with threshold activation); see § Terminology. Multilayer perceptrons are sometimes colloquially referred to as "vanilla" neural networks, especially when they have a single hidden layer.
 
+An MLP consists of at least three layers of nodes: an input layer, a hidden layer and an output layer. Except for the input nodes, each node is a neuron that uses a nonlinear activation function. MLP utilizes a supervised learning technique called backpropagation for training. Its multiple layers and non-linear activation distinguish MLP from a linear perceptron. It can distinguish data that is not linearly separable.
 
+![alt text](https://dzone.com/storage/temp/3627042-mlp-network.png)
+
+Till date, there is no implementation of the incremental version of the neural network in
+Spark. However, the Multilayer perceptron classifier (MLPC) is a classifier based on the feedforward artificial neural network in the current implementation of Spark ML API.
+
+The MLPC employs backpropagation for learning the model. Technically, Spark used the logistic loss function for optimization and L-BFGS as an optimization routine. The number of nodes (say) N in the output layer corresponds to the number of classes.
+
+MLPC also performs backpropagation for learning the model. On the other hand, Spark uses the logistic loss function for optimization and Limited-memory Broyden-Fletcher-Goldfarb-Shanno (LBFGS) as an optimization routine. Note that the L-BFGS is an optimization algorithm in the family of Quasi-Newton Method (QNM) that approximates the Broyden-Fletcher-Goldfarb-Shanno algorithm using a limited main memory [2].
+
+To train a Spark ML based multilayer perceptron classifier, the following parameters need to be set:
+
+Layer
+Tolerance of iteration
+Block size of the learning
+Seed size
+Max iteration number
 
 ## 3. Results tables
 ### 3.1 Decision Tree
@@ -130,38 +97,38 @@ Disadvantages
 ### 3.3 Logistic Regression 
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 1	| 0 | 0 |	0 |	0 |	0 |	0 | 0 |
-| 2	| 0 |	0 |	0	| 0 |	0 |	0 | 0 |
-| 3 |	0	| 0 | 0	| 0 |	0 |	0 | 0 |
-| 4 |	0 |	0 |	0 |	0 |	0 |	0 | 0 |
-| 5	| 0	| 0	| 0 |	0 |	0 |	0 | 0 |
-| 6	| 0	| 0	| 0	|	0 |	0 |	0 | 0 |
-| 7	| 0 |	0 |	0 |	0 |	0 |	0 | 0 |
-| 8	| 0 |	0 |	0 |	0 |	0 |	0 | 0 |
-| 9	| 0 |	0 |	0 |	0 |	0 |	0 | 0 |
-| 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Average | 0 | 0 | 0  | 0 | 0 | 0  | 0 |
+| 1	| 0.886 | 0.113 |	400 |	295 |	709 |	910 | 25 |
+| 2	| 0.886 |	0.113 |	284	| 423 |	723 |	910 | 12 |
+| 3 |	0.885	| 0.114 | 213	| 500 |	731 |	910 | 12 |
+| 4 |	0.889 |	0.110 |	465 |	232 |	726 |	910 | 12 |
+| 5	| 0.887	| 0.112	| 334 |	370 |	726 |	910 | 11 |
+| 6	| 0.882	| 0.117	| 494	|	484 |	725 |	910 | 12 |
+| 7	| 0.886 |	0.113 |	520 |	470 |	729 |	910 | 12 |
+| 8	| 0.888 |	0.111 |	433 |	238 |	700 |	910 | 13 |
+| 9	| 0.883 |	0.116 |	340 |	350 |	722 |	910 | 13 |
+| 10 | 0.887 | 0.112 | 583 | 388 | 722 | 910 | 13 |
+| Average | 0.883 | 0.113 | 406  | 375 | 676  | 910  | 13.5 |
 
 ### 3.4 Multilayer perceptron 
 
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-| 1 |	0	| 0 |	0 |	0 |	0 |	0 | 0 |
-| 2 |	0 |	0 |	0 |	0 |	0 |	0 | 0 |
-| 3 |	0 |	0	| 0 |	0 |	0 |	0 | 0 |
-| 4 |	0 |	0 |	0 |	0 |	0 |	0 | 0 |
-| 5 |	0	| 0	| 0 |	0 |	0 |	0 | 0 |
-| 6	| 0	| 0	| 0 |	0 |	0 |	0 | 0 |
-| 7	| 0	| 0	| 0 |	0 |	0 |	0 | 0 |
-| 8 |	0	| 0	| 0 |	0 |	0 |	0 | 0 |
-| 9	| 0 |	0 |	0 |	0 |	0 |	0 | 0 |
-| 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Average |	0 |	0	| 0	|	0	| 0	| 0 | 0 |
+| 1 |	0.885	| 0.114 |	490 |	194 |	722 |	910 | 13 |
+| 2 |	0.888 |	0.111 |	565 |	114 |	726 |	910 | 14 |
+| 3 |	0.884 |	0.115	| 580 |	108 |	731 |	910 | 14 |
+| 4 |	0.888 |	0.111 |	376 |	308 |	731 |	910 | 15 |
+| 5 |	0.887	| 0.112	| 608 |	75 |	732 |	910 | 15 |
+| 6	| 0.889	| 0.110	| 710 |	259 |	734 |	910 | 16 |
+| 7	| 0.882	| 0.117	| 620 |	321 |	996 |	996 | 18 |
+| 8 |	0.885	| 0.114	| 638 |	292 |	992 |	992 | 18 |
+| 9	| 0.890 |	0.109 |	527 |	404 |	993 |	993 | 20 |
+| 10 | 0.884 | 0.115 | 607 | 319 | 994 | 981 | 19 |
+| Average |	0.883 |	0.112	| 572	|	239	| 835 | 942	 | 16.2 |
 
 ### Comparison (Averages)
 | Algorithm | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | Decision Tree | 0.897 | 0.101 | 375  | 385  | 783  | 910  | 12.174 |
 | Support Vector Machine |0.887 | 0.111  | 648  | 304  | 973  | 994  | 42.722 |
-| Logistic Regression |	0 | 0 | 0 |	0 | 0 |	0 | 0 |
-| Multilayer perceptron |	0 |	0 |	0 | 0 | 0 |	0 | 0 |
+| Logistic Regression | 0.883 | 0.1131 | 406  | 375 | 676  | 910  | 13.5 |
+| Multilayer perceptron |	0.883 |	0.112	| 572	|	239	| 835 | 942	 | 16.2 |
