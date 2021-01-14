@@ -8,7 +8,7 @@ Machine learning is a discipline in which the systems developed learn complex pa
 based on a data collection. These systems are developed using algorithms that help us to classify and analyze the data, in this 
 project we are going to see and compare some of these algorithms. 
 
-## 2. Algorithms
+## 2. Theoretical framework
 ### 2.1 Decision Tree
 Decision tree is the most powerful and popular tool for classification and prediction. A Decision tree is a flowchart like tree structure, where each internal node denotes a test on an attribute, each branch represents an outcome of the test, and each leaf node (terminal node) holds a class label.
 
@@ -59,7 +59,7 @@ The mathematic definition of the hyperplane can be described by an equation:
 
 β0+β1x1+β2x2=0
 
-Given the parameters β0, β1 y β2, and all the paired values x=(x1,x2) para los que se cumple la igualdad son puntos del hiperplano. Esta ecuación puede generalizarse para n-dimensiones: for which the equality is fulfilled are points in the hyperplane. This equation can be generalized for n-dimensions
+Given the parameters β0, β1 y β2, and all the paired values x=(x1,x2) for which the equality is fulfilled are points in the hyperplane. This equation can be generalized for n-dimensions
 
 β0+β1x1+β2x2+...+βnxn=0
 and for all the points defined by the vector (x=x1,x2,...,xn) which fulfill the equation belongs to the hyperplane
@@ -115,8 +115,22 @@ To train a Spark ML based multilayer perceptron classifier, the following parame
 
 Layer, Tolerance of iteration, Block size of the learning, Seed size, Max iteration number
 
-## 3. Results tables
-### 3.1 Decision Tree
+## 3. Implementation
+
+For this project we're going to use the following tools:
+
+Apache Spark
+
+Apache Spark is a data processing framework that can quickly perform processing tasks on very large data sets, and can also distribute data processing tasks across multiple computers, either on its own or in tandem with other distributed computing tools. These two qualities are key to the worlds of big data and machine learning, which require the marshalling of massive computing power to crunch through large data stores. Spark also takes some of the programming burdens of these tasks off the shoulders of developers with an easy-to-use API that abstracts away much of the grunt work of distributed computing and big data processing.
+
+Scala
+
+Scala is a high level language that combines functional and object oriented programming with high performance runtimes. 
+Scala is a powerful language that can leverage many of the same functions as Python, such as building machine learning models.
+
+
+## 4. Results tables
+### 4.1 Decision Tree
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 1 | 0.898 | 0.101 | 370 | 392 | 777 | 910 | 21.202 |
@@ -131,7 +145,7 @@ Layer, Tolerance of iteration, Block size of the learning, Seed size, Max iterat
 | 10 | 0.895 | 0.104 | 545 | 202 | 780 | 910 | 12.521 |
 | Average | 0.897 | 0.101 | 375  | 385  | 783  | 910  | 12.174 |
 
-### 3.2 Support Vector Machine
+### 4.2 Support Vector Machine
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 1 | 0.884 | 0.115 | 622 | 148 | 807 | 910 | 43.909 |
@@ -147,7 +161,7 @@ Layer, Tolerance of iteration, Block size of the learning, Seed size, Max iterat
 | Average | 0.887 | 0.111  | 648  | 304  | 973  | 994  | 42.722 |
 
 
-### 3.3 Logistic Regression 
+### 4.3 Logistic Regression 
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | 1	| 0.886 | 0.113 |	400 |	295 |	709 |	910 | 25 |
@@ -162,7 +176,7 @@ Layer, Tolerance of iteration, Block size of the learning, Seed size, Max iterat
 | 10 | 0.887 | 0.112 | 583 | 388 | 722 | 910 | 13 |
 | Average | 0.883 | 0.113 | 406  | 375 | 676  | 910  | 13.5 |
 
-### 3.4 Multilayer perceptron 
+### 4.4 Multilayer perceptron 
 
 | Iteration | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
@@ -178,10 +192,16 @@ Layer, Tolerance of iteration, Block size of the learning, Seed size, Max iterat
 | 10 | 0.884 | 0.115 | 607 | 319 | 994 | 981 | 19 |
 | Average |	0.883 |	0.112	| 572	|	239	| 835 | 942	 | 16.2 |
 
-### Comparison (Averages)
+### 4.5 Comparison (Averages)
 | Algorithm | Accuracy | Error | Used memory | Free Memory | Total Memory | Max Memory | Time (seconds)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | Decision Tree | 0.897 | 0.101 | 375  | 385  | 783  | 910  | 12.174 |
 | Support Vector Machine |0.887 | 0.111  | 648  | 304  | 973  | 994  | 42.722 |
 | Logistic Regression | 0.883 | 0.1131 | 406  | 375 | 676  | 910  | 13.5 |
 | Multilayer perceptron |	0.883 |	0.112	| 572	|	239	| 835 | 942	 | 16.2 |
+
+## 5. Conclusion
+
+## 6. References
+
+
