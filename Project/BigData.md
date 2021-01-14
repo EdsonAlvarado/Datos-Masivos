@@ -14,6 +14,8 @@ Final Project
 ### 5. [Conclusion](#conclusion)
 ### 6. [References](#references)
 
+---
+
 ## 1. Introduction <a name="introduction"></a>
 
 Machine learning is a discipline in which the systems developed learn complex patterns automatically to predict future behaviors
