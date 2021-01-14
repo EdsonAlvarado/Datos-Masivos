@@ -56,11 +56,7 @@ MLPC also performs backpropagation for learning the model. On the other hand, Sp
 
 To train a Spark ML based multilayer perceptron classifier, the following parameters need to be set:
 
-Layer
-Tolerance of iteration
-Block size of the learning
-Seed size
-Max iteration number
+Layer, Tolerance of iteration, Block size of the learning, Seed size, Max iteration number
 
 ## 3. Results tables
 ### 3.1 Decision Tree
