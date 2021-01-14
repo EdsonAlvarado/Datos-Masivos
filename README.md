@@ -45,7 +45,7 @@ A multilayer perceptron (MLP) is a class of feedforward artificial neural networ
 
 An MLP consists of at least three layers of nodes: an input layer, a hidden layer and an output layer. Except for the input nodes, each node is a neuron that uses a nonlinear activation function. MLP utilizes a supervised learning technique called backpropagation for training. Its multiple layers and non-linear activation distinguish MLP from a linear perceptron. It can distinguish data that is not linearly separable.
 
-![alt text](https://dzone.com/storage/temp/3627042-mlp-network.png)
+![alt text](https://miro.medium.com/max/3446/1*-IPQlOd46dlsutIbUq1Zcw.png)
 
 Till date, there is no implementation of the incremental version of the neural network in
 Spark. However, the Multilayer perceptron classifier (MLPC) is a classifier based on the feedforward artificial neural network in the current implementation of Spark ML API.
