@@ -52,7 +52,7 @@ Spark. However, the Multilayer perceptron classifier (MLPC) is a classifier base
 
 The MLPC employs backpropagation for learning the model. Technically, Spark used the logistic loss function for optimization and L-BFGS as an optimization routine. The number of nodes (say) N in the output layer corresponds to the number of classes.
 
-MLPC also performs backpropagation for learning the model. On the other hand, Spark uses the logistic loss function for optimization and Limited-memory Broyden-Fletcher-Goldfarb-Shanno (LBFGS) as an optimization routine. Note that the L-BFGS is an optimization algorithm in the family of Quasi-Newton Method (QNM) that approximates the Broyden-Fletcher-Goldfarb-Shanno algorithm using a limited main memory [2].
+MLPC also performs backpropagation for learning the model. On the other hand, Spark uses the logistic loss function for optimization and Limited-memory Broyden-Fletcher-Goldfarb-Shanno (LBFGS) as an optimization routine. Note that the L-BFGS is an optimization algorithm in the family of Quasi-Newton Method (QNM) that approximates the Broyden-Fletcher-Goldfarb-Shanno algorithm using a limited main memory.
 
 To train a Spark ML based multilayer perceptron classifier, the following parameters need to be set:
 
