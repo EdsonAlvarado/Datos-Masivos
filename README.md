@@ -202,6 +202,8 @@ Scala is a powerful language that can leverage many of the same functions as Pyt
 
 ## 5. Conclusion
 
+We can see that the Decision Tree Classsifier method obtained the highest precision, while Logistic Regression and Multilayer Perceptron obtained the lowest precision compared to the 4 methods. In the Error Test Decision Tree Classifier is again better compared to the other methods, obtaining a lower error test, instead Logistic Regression obtains the highest Error Test which makes it the worst of the 4 methods.
+
 ## 6. References
 
 
